@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prashant Saboo - Personal Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Freestyle+Script&display=swap" rel="preload" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Freestyle+Script&display=swap" rel="stylesheet">
     <style>
         * {
@@ -50,10 +51,28 @@
             image-rendering: optimizeQuality;
             background-size: cover;
             background-position: center;
+            background-color: #555;
         }
 
         .profile-photo:hover {
             transform: scale(1.05);
+        }
+
+        .profile-placeholder {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 3px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0 auto 25px auto;
         }
 
         h1 {
@@ -61,8 +80,9 @@
             font-size: 3rem;
             margin-bottom: 10px;
             font-weight: 700;
-            font-family: 'Freestyle Script', cursive;
+            font-family: 'Freestyle Script', cursive, sans-serif;
             font-style: italic;
+            font-display: swap;
         }
 
         .subtitle {
@@ -92,12 +112,60 @@
             margin-top: 5px;
         }
 
-        .reach-text {
-            color: #ccc;
-            font-size: 1rem;
-            font-style: italic;
-            text-align: center;
-            margin: 20px 0 15px 0;
+        .floating-phone {
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .floating-phone:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-phone svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .floating-email {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .floating-email:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-email svg {
+            width: 14px;
+            height: 14px;
         }
 
         .footer {
@@ -159,7 +227,9 @@
         }
 
         .email {
-            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53) !important;
+            display: inline-flex !important;
+            visibility: visible !important;
         }
 
         .email {
@@ -209,7 +279,24 @@
 </head>
 <body>
     <div class="container">
-        <img src="profile.png" alt="Prashant Saboo Profile Photo" class="profile-photo">
+        <div class="profile-container">
+            <img src="profile.png" alt="Prashant Saboo Profile Photo" class="profile-photo" onerror="this.style.display='none'; document.querySelector('.profile-placeholder').style.display='flex';">
+            <div class="profile-placeholder" style="display: none;">PS</div>
+        </div>
+
+    <!-- Floating Phone Button -->
+    <a href="tel:+919866444444" class="floating-phone" title="Call +91 9866444444">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+    </a>
+
+    <!-- Floating Email Button -->
+    <a href="mailto:md@saboo.in" class="floating-email" title="Email md@saboo.in">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+    </a>
         
         <h1>Prashant Saboo</h1>
         <p class="subtitle">Know more about me here..</p>
@@ -251,6 +338,19 @@
     <script>
         // Profile image is now static - no upload functionality needed
         console.log('Website loaded successfully!');
+        
+        // Debug: Check if phone icon is rendered
+        setTimeout(() => {
+            const phoneIcon = document.querySelector('.phone');
+            const secondRow = document.querySelector('.second-row');
+            
+            console.log('Second row found:', secondRow ? 'YES' : 'NO');
+            console.log('Phone icon found:', phoneIcon ? 'YES' : 'NO');
+            
+            if (secondRow) {
+                console.log('Second row children count:', secondRow.children.length);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
